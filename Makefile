@@ -26,9 +26,13 @@ CFLAGS	= -Wall -O3 -g -fomit-frame-pointer -finline-functions -static
 #CC	= cc
 #CFLAGS	= -O
 
-bogomips.nat bogomips.arm: bogomips.c Makefile
+
+bogomips : bogomips.c 
 	$(CC) $(DEFS) $(CFLAGS) -o bogomips.nat bogomips.c
 	objdump -d --source bogomips.nat > bogomips.nat.asm
+
+
+bogomips.arm : bogomips.c
 	arm-linux-gnueabi-gcc $(DEFS) $(CFLAGS) -o bogomips.arm bogomips.c
 	arm-linux-gnueabi-objdump -d --source bogomips.arm > bogomips.arm.asm
 
